@@ -1,0 +1,3 @@
+In Python you can import modules that other programmers wrote.
+In Python loop through lists, tuples, and dictionaries.
+In Python you can do conditional checking.
