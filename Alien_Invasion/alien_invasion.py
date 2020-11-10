@@ -16,6 +16,7 @@ class AlienInvasion:
 		"""Initialize the game, and create game resources."""
 		pygame.init()
 		self.settings = Settings()
+		# Reference 1.3.g
 		self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 		self.settings.screen_width = self.screen.get_rect().width
 		self.settings.screen_height = self.screen.get_rect().height
@@ -26,7 +27,9 @@ class AlienInvasion:
 		self.stats = GameStats(self)
 		self.sb = Scoreboard(self)
 
+		# Reference 1.1.b
 		self.ship = Ship(self)
+		# Reference 1.4.c
 		self.bullets = pygame.sprite.Group()
 		self.aliens = pygame.sprite.Group()
 
@@ -41,20 +44,26 @@ class AlienInvasion:
 	def run_game(self):
 		"""Start the main loop for the game."""
 		while True:
+			# Reference 1.2.a
 			self._check_events()
 
 			if self.stats.game_active:
+				# Reference 1.3.b
 				self.ship.update()
+				# Reference 1.4.c, 1.4.g
 				self._update_bullets()
 				self._update_aliens()
 			
+			# Reference 1.2.b
 			self._update_screen()
 
 	def _check_events(self):
 		"""Respond to keypresses and mouse events."""
+		# Reference 1.2.a
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
+			# Reference 1.3.b, 1.2.a
 			elif event.type == pygame.KEYDOWN:
 				self._check_keydown_events(event)
 			elif event.type == pygame.KEYUP:
@@ -90,19 +99,25 @@ class AlienInvasion:
 
 	def _check_keydown_events(self, event):
 		"""Respond to keypresses."""
+		# Reference 1.3.b, 1.2.a
 		if event.key == pygame.K_RIGHT:
 			self.ship.moving_right = True
+		# Reference 1.3.c
 		elif event.key == pygame.K_LEFT:
 			self.ship.moving_left = True
+		# Reference 1.3.f
 		elif event.key == pygame.K_q:
 			sys.exit()
+		# Reference 1.4.d
 		elif event.key == pygame.K_SPACE:
 			self._fire_bullet()
 
 	def _check_keyup_events(self, event):
 		"""Respond to key releases."""
+		# Reference 1.2.a
 		if event.key == pygame.K_RIGHT:
 			self.ship.moving_right = False
+		# Reference 1.3.c, 1.2.a
 		elif event.key == pygame.K_LEFT:
 			self.ship.moving_left = False
 
@@ -149,17 +164,20 @@ class AlienInvasion:
 			alien.rect.y += self.settings.fleet_drop_speed
 		self.settings.fleet_direction *= -1
 
+	# Reference 1.4.d
 	def _fire_bullet(self):
 		"""Create a new bullet and add it to the bullets group."""
 		if len(self.bullets) < self.settings.bullets_allowed:
 			new_bullet = Bullet(self)
 			self.bullets.add(new_bullet)
 	
+	# Reference 1.4.g
 	def _update_bullets(self):
 		"""Update position of bullets and get rid of old bullets."""
 		# Update bullet positions.
 		self.bullets.update()
 
+		# Reference 1.4.e
 		# Get rid of bullets that have disappeared.
 		for bullet in self.bullets.copy():
 			if bullet.rect.bottom <= 0:
@@ -168,9 +186,12 @@ class AlienInvasion:
 		self._check_bullet_alien_collisions()
 
 	def _update_screen(self):
+		# Reference 1.2.b
 		"""Update images on the screen, and flip to the new screen."""
 		self.screen.fill(self.settings.bg_color)
+		# Reference 1.1.b
 		self.ship.blitme()
+		# Reference 1.4.d
 		for bullet in self.bullets.sprites():
 			bullet.draw_bullet()
 		self.aliens.draw(self.screen)

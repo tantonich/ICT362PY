@@ -1,0 +1,32 @@
+Game Overview -
+
+In Alien Invasion, the player controls a ship that appears at
+the bottom center of the screen. The player can move the ship
+right and left using the arrow keys and shoot bullets using the
+spacebar. When the game begins, a fleet of aliens fills the sky
+and moves across and down the screen. The player shoots and
+destroys the aliens. If the player shoots all the aliens, a new fleet
+appears that moves faster than the previous fleet. If any alien hits
+the player’s ship or reaches the bottom of the screen, the player
+loses a ship. If the player loses three ships, the game ends.
+
+Software Requirements -
+
+1. Create a ship that files bullets
+	a. Add the ship image
+	b. Refactor the _check_events() and _update_screen() Methods
+	c. Pilot the ship
+	d. Shoot bullets
+
+2. Create the aliens
+	a. Create the first alien
+	b. Build an alien fleet
+	c. Make the feet move
+	d. Make them shooting aliens
+
+3. End the game
+
+4. Create the scoring board
+	a. Add the play button
+	b. Add a level up feature
+	c. Keep the Score and Display it
