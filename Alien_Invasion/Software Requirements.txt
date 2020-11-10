@@ -13,20 +13,57 @@ loses a ship. If the player loses three ships, the game ends.
 Software Requirements -
 
 1. Create a ship that files bullets
-	a. Add the ship image
-	b. Refactor the _check_events() and _update_screen() Methods
-	c. Pilot the ship
-	d. Shoot bullets
+	1. Add the ship image
+		a. Creating the Ship Class
+		b. Drawing the ship on the screen
+	2. Refactor the _check_events() and _update_screen() Methods
+		a. The _check_events() Method
+		b. The _update_screen() Method
+	3. Pilot the ship
+		a. Responding to keypresses
+		b. Allowing continuous movement
+		c. Moving Both Left and Right
+		d. Adjusting the Ship’s Speed
+		e. Limiting the Ship’s Range
+		f. Pressing Q to Quit
+		g. Running the Game in Fullscreen Mode
+	4. Shoot bullets
+		a. Adding the Bullet Settings
+		b. Creating the Bullet Class
+		c. Storing Bullets in a Group
+		d. Firing Bullets
+		e. Deleting Old Bullets
+		f. Limiting the Number of Bullets
+		g. Creating the _update_bullets() Method
 
 2. Create the aliens
-	a. Create the first alien
-	b. Build an alien fleet
-	c. Make the feet move
-	d. Make them shooting aliens
+	1. Create the first alien
+		a. Creating the Alien Class
+		b. Creating an Instance of the Alien
+	2. Build an alien fleet
+		a. Creating a Row of Aliens
+		b. Refactoring _create_fleet()
+		c. Adding Rows
+	3. Make the feet move
+		a. Moving the Aliens Right
+		b. Creating Settings for Fleet Direction
+		c. Checking Whether an Alien Has Hit the Edge
+		d. Dropping the Fleet and Changing Direction
+	4. Make them shooting aliens
+		a. Detecting Bullet Collisions
+		b. Repopulating the Fleet
+		c. Speeding Up the Bullets
+		d. Refactoring _update_bullets()
 
 3. End the game
+	a. Detecting Alien and Ship Collisions
+	b. Responding to Alien and Ship Collisions
+	c. Create a game stats class
+	d. Aliens that Reach the Bottom of the Screen
+	e. Game Over!
+	f. Identifying When Parts of the Game Should Run
 
 4. Create the scoring board
-	a. Add the play button
-	b. Add a level up feature
-	c. Keep the Score and Display it
+	1. Add the play button
+	2. Add a level up feature
+	3. Keep the Score and Display it

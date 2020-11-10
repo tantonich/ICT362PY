@@ -1,12 +1,14 @@
 import pygame
 from pygame.sprite import Sprite
 
+# Reference 4.3.k
 class Ship(Sprite):
 	"""A class to manage the ship."""
 	# Reference 1.1.a
 
 	def __init__(self, ai_game):
 		"""Initialize the ship and set its starting position."""
+		# Reference 4.3.k
 		super().__init__()
 		self.screen = ai_game.screen		
 		# Reference 1.3.d
@@ -49,6 +51,7 @@ class Ship(Sprite):
 		"""Draw the ship at its current location."""
 		self.screen.blit(self.image, self.rect)
 
+	# Reference 3.b
 	def center_ship(self):
 		"""Center the ship on the screen."""
 		self.rect.midbottom = self.screen_rect.midbottom

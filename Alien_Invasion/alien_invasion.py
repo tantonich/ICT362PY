@@ -24,20 +24,25 @@ class AlienInvasion:
 
 		# Create an instance to score game statistics,
 		#	and create a scoreboard
+		# Reference 3.b
 		self.stats = GameStats(self)
+		# Reference 4.3.c
 		self.sb = Scoreboard(self)
 
 		# Reference 1.1.b
 		self.ship = Ship(self)
 		# Reference 1.4.c
 		self.bullets = pygame.sprite.Group()
+		# Reference 2.1.b
 		self.aliens = pygame.sprite.Group()
 
+		# Reference 2.1.b
 		self._create_fleet()
 
 		# Set the background color.
 		self.bg_color = (230, 230, 230)
 
+		# Reference 4.1.b
 		# Make the Play button.
 		self.play_button = Button(self, "Play")
 
@@ -47,11 +52,13 @@ class AlienInvasion:
 			# Reference 1.2.a
 			self._check_events()
 
+			# Reference 3.f
 			if self.stats.game_active:
 				# Reference 1.3.b
 				self.ship.update()
 				# Reference 1.4.c, 1.4.g
 				self._update_bullets()
+				# Reference 2.3.a
 				self._update_aliens()
 			
 			# Reference 1.2.b
@@ -68,32 +75,43 @@ class AlienInvasion:
 				self._check_keydown_events(event)
 			elif event.type == pygame.KEYUP:
 				self._check_keyup_events(event)
+			# Reference 4.1.c
 			elif event.type == pygame.MOUSEBUTTONDOWN:
 				mouse_pos = pygame.mouse.get_pos()
 				self._check_play_button(mouse_pos)
 
+	# Reference 4.1.c, 4.1.d, 4.1.e
 	def _check_play_button(self, mouse_pos):
 		"""Start a new game when the player clicks Play."""
+		# Reference 4.1.e
 		button_clicked = self.play_button.rect.collidepoint(mouse_pos)
 		if button_clicked and not self.stats.game_active:
 			# Reset the game settings.
+			# Reference 4.2.b
 			self.settings.initialize_dynamic_settings()
 
 			# Reset the game statistics.
+			# Reference 4.1.d
 			self.stats.reset_stats()
 			self.stats.game_active = True
+			# Reference 4.3.e
 			self.sb.prep_score()
+			# Reference 4.3.j
 			self.sb.prep_level()
+			# Reference 4.3.k
 			self.sb.prep_ships()
 
+			# Reference 4.1.d
 			# Get rid of any remaining aliens and bullets.
 			self.aliens.empty()
 			self.bullets.empty()
 
+			# Reference 4.1.d
 			# Create a new fleet and center the ship.
 			self._create_fleet()
 			self.ship.center_ship()
 
+			# Reference 4.1.f
 			# Hide the mouse curson.
 			pygame.mouse.set_visible(False)
 
@@ -121,6 +139,7 @@ class AlienInvasion:
 		elif event.key == pygame.K_LEFT:
 			self.ship.moving_left = False
 
+	# Reference 2.3.d
 	def _check_fleet_edges(self):
 		"""Respond appropriately if any aliens have reached an edge."""
 		for alien in self.aliens.sprites():
@@ -128,27 +147,36 @@ class AlienInvasion:
 				self._change_fleet_direction()
 				break
 
+	# Reference 2.4.d
 	def _check_bullet_alien_collisions(self):
 		"""Respond to bullet-alien collisions."""
 		# Remove any bullets and aliens that have collided.
+		# Reference 2.4.a
 		collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
+		# Reference 4.1.d
 		if collisions:
+			# Reference 4.3.f
 			for aliens in collisions.values():
 				self.stats.score += self.settings.alien_points * len(aliens)
 			self.sb.prep_score()
+			# Reference 4.3.i
 			self.sb.check_high_score()
 
+		# Reference 2.4.b
 		if not self.aliens:
 			# Destroy existing bullets and create new fleet.
 			self.bullets.empty()
 			self._create_fleet()
+			# Reference 4.2.a
 			self.settings.increase_speed()
 
+			# Reference 4.3.j
 			# Increase level.
 			self.stats.level += 1
 			self.sb.prep_level()
 
+	# Reference 3.d
 	def _check_aliens_bottom(self):
 		"""Check if any aliens have reached the bottom of the screen."""
 		screen_rect = self.screen.get_rect()
@@ -158,6 +186,7 @@ class AlienInvasion:
 				self._ship_hit()
 				break
 
+	# Reference 2.3.d
 	def _change_fleet_direction(self):
 		"""Drop the entire fleet and change the fleet's direction."""
 		for alien in self.aliens.sprites():
@@ -183,6 +212,7 @@ class AlienInvasion:
 			if bullet.rect.bottom <= 0:
 				self.bullets.remove(bullet)
 
+		# Reference 2.4.d
 		self._check_bullet_alien_collisions()
 
 	def _update_screen(self):
@@ -194,32 +224,41 @@ class AlienInvasion:
 		# Reference 1.4.d
 		for bullet in self.bullets.sprites():
 			bullet.draw_bullet()
+		# Reference 2.1.b
 		self.aliens.draw(self.screen)
 
 		# Draw the score information.
+		# Reference 4.3.c
 		self.sb.show_score()
 
+		# Reference 4.1.b
 		# Draw the play button if the game is inactive.
 		if not self.stats.game_active:
 			self.play_button.draw_button()
 
 		pygame.display.flip()
 
+	# Reference 2.3.a, 2.3.d
 	def _update_aliens(self):
 		"""
 		Update if the fleet is at an edge, 
 		  then update the positions of all aliens in the fleet.
 		"""
+		# Reference 2.3.d
 		self._check_fleet_edges()
+		# Reference 2.3.a
 		self.aliens.update()
 
+		# Reference 3.a, 3.b
 		# Look for alien-ship collisions.
 		if pygame.sprite.spritecollideany(self.ship, self.aliens):
 			self._ship_hit()
 
+		# Reference 3.d
 		# Look for aliens hitting the bottom of the screen.
 		self._check_aliens_bottom()
 
+	# Reference 2.1.b, 2.2.a, 2.2.c
 	def _create_fleet(self):
 		"""Create the fleet of aliens."""
 		# Create an alien and find the number of aliends in a row.
@@ -234,16 +273,20 @@ class AlienInvasion:
 		available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
 		number_rows = available_space_y // (2* alien_height)
 
+		# Reference 2.2.b
 		# Create the full fleet of aliens.
 		for row_number in range(number_rows):
 				for alien_number in range(number_aliens_x):
 					self._create_alien(alien_number, row_number)
 
+	# Reference 3.b
 	def _ship_hit(self):
 		"""Respond to the ship being hit by an alien."""
+		# Reference 3.e
 		if self.stats.ships_left > 0:
 			# Decrement ships_left and update scoreboard.
 			self.stats.ships_left -= 1
+			# Reference 4.3.k
 			self.sb.prep_ships()
 
 			# Get rid of any remaining aliens and bullets.
@@ -256,10 +299,13 @@ class AlienInvasion:
 
 			# Pause.
 			sleep(0.5)
+		# Reference 3.e
 		else:
 			self.stats.game_active = False
+			# Reference 4.1.f
 			pygame.mouse.set_visible(True)
 
+	# Reference 2.2.b, 2.2.c
 	def _create_alien(self, alien_number, row_number):
 		"""Create an alien and place it in the row."""
 		alien = Alien(self)
