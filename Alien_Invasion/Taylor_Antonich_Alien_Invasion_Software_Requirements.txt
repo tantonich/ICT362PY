@@ -44,7 +44,7 @@ Software Requirements -
 		a. Creating a Row of Aliens
 		b. Refactoring _create_fleet()
 		c. Adding Rows
-	3. Make the feet move
+	3. Make the fleet move
 		a. Moving the Aliens Right
 		b. Creating Settings for Fleet Direction
 		c. Checking Whether an Alien Has Hit the Edge
