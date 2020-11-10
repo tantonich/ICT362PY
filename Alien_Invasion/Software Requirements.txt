@@ -65,5 +65,36 @@ Software Requirements -
 
 4. Create the scoring board
 	1. Add the play button
+		a. Creating a Button Class
+		b. Drawing the Button to the Screen
+		c. Starting the Game
+		d. Resetting the Game
+		e. Deactivating the Play Button
+		f. Hiding the Mouse Cursor
 	2. Add a level up feature
+		a. Modifying the Speed Settings
+		b. Resetting the Speed
 	3. Keep the Score and Display it
+		a. Zeroize the score
+		b. Displaying the Score
+		c. Making a Scoreboard
+		d. Updating the Score as Aliens Are Shot Down
+		e. Resetting the Score
+		f. Making Sure to Score All Hits
+		g. Increasing Point Values
+		h. Rounding the Score
+		i. High Scores
+		j. Displaying the Level
+		k. Displaying the Number of Ships
+		
+
+
+
+
+
+
+
+
+
+
+
